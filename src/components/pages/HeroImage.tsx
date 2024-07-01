@@ -27,7 +27,7 @@ export default function HeroImage({ stories }: HeroImageProps) {
         setSelectedStory(stories?.at(index) || null);
     };
 
-    const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+    const [currentStoryIndex] = useState(0);
 
     // useEffect(() => {
     //     const timer = setInterval(() => {

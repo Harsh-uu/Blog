@@ -1,8 +1,8 @@
-import { useState, FormEvent, MouseEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import supabase from "../../utils";
 import { quotes } from "../../quotes";
 
@@ -10,7 +10,7 @@ export default function Login() {
   const [randomQuote, setRandomQuote] = useState<
     (typeof quotes)[number] | null
   >(null);
-  const location = useLocation();
+  // const location = useLocation();
   // const accountCreated = location.state?.accountCreated;
 
   const navigate = useNavigate();

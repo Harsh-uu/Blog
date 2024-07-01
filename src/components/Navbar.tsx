@@ -38,7 +38,7 @@ export default function Navbar() {
     }
   };
   useEffect(() => {
-    supabase.auth.getUser().then(({ data, error }) => {
+    supabase.auth.getUser().then(({ data }) => {
       // console.log(error);
       if (data) setUser(data.user);
     });

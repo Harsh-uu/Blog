@@ -1,10 +1,27 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { stories } from "../../App";
 
-const BlogPost = () => {
+interface Story {
+  id: number;
+  title: string;
+  description: string;
+  author: string;
+  created_at: string;
+  comment_count: number;
+  image: string;
+  content: string;
+  userid: string;
+}
+
+interface BlogPostProps {
+  stories: Story[];
+}
+
+
+const BlogPost = ({stories}:BlogPostProps) => {
   const title = useParams();
   const story = stories.find(story => story.id === Number(title.id));
+
   return (
     <>
       <div className="mt-24 px-40 bg-[#ffffff] text-black">
@@ -25,8 +42,8 @@ const BlogPost = () => {
             <p className="text-[1.6rem] font-extralight"><span className="text-[#5200ff]">/</span> New guidance from the Office of Management and Budget also requires a yearly inventory of all AI systems used by federal agencies.</p>
             <div className="text-[0.8rem]">
               <p>By <span className="text-[#5200ff]">{story?.author}</span>, a reporter who covers AI. Prior to joining Blogology, she covered the intersection between technology, finance, and the economy.</p>
-              <p className="mt-2 text-[#636363]">{story?.date}, 2024</p>
-              <p className="mt-2">{story?.comments} Comment</p>
+              <p className="mt-2 text-[#636363]">{story?.created_at? new Date(story?.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric' }).toUpperCase() : ""}, 2024</p>
+              <p className="mt-2">{story?.comment_count} Comments</p>
               <div>
               </div>
             </div>

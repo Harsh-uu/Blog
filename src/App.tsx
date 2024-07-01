@@ -1,94 +1,96 @@
-import { Routes, Route } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import Entertainment from './components/pages/Entertainment';
-import Reviews from './components/pages/Reviews';
-import Science from './components/pages/Science';
-import Tech from './components/pages/Tech';
-import Categories from './components/Categories';
-import Navbar from './components/Navbar';
-import HeroImage from './components/pages/HeroImage';
-import BlogPost from './components/pages/BlogPost';
-import SearchResults from './components/pages/SearchResults';
-
-export const stories = [
-  {
-    id: 0,
-    title: "How the House revived the TikTok ban before most of us noticed",
-    description: "TikTok mobilized users to lobby Congress, and it backfired spectacularly.",
-    author: "ALLISON JOHNSON",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2040x1334/750x600/filters:focal(1228x514:1229x515):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25332833/STK051_TIKTOKBAN_CVirginia_A.jpg"
-  },
-  {
-    id: 1,
-    title: "Qualcomm's new 8S Gen 3 targets not-quite flagship phones",
-    description: "Qualcomm's new 8S Gen 3 targets not-quite flagship phones",
-    author: "ALLISON JOHNSON",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2000x1323/128x102/filters:focal(1000x662:1001x663):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25338088/Snapdragon_8s_Gen_3___Key_Visual.jpg"
-  },
-  {
-    id: 2,
-    title: "Nvidia reveals Blackwell B200 GPU, the ‘world’s most powerful chip’ for AI",
-    description: "Nvidia reveals Blackwell B200 GPU, the ‘world’s most powerful chip’ for AI",
-    author: "SEAN HOLLISTER",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2000x1323/128x102/filters:focal(1000x662:1001x663):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25338088/Snapdragon_8s_Gen_3___Key_Visual.jpg"
-  },
-  {
-    id: 3,
-    title: "The Supreme Court is skeptical of restricting the White House from talking to social media platforms",
-    description: "The Supreme Court is skeptical of restricting the White House from talking to social media platforms",
-    author: "LAUREN FEINER",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2000x1323/128x102/filters:focal(1000x662:1001x663):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25338088/Snapdragon_8s_Gen_3___Key_Visual.jpg"
-  },
-  {
-    id: 4,
-    title: "Apple’s AI ambitions could include Google or OpenAI",
-    description: "Apple’s AI ambitions could include Google or OpenAI",
-    author: "JON PORTER",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2000x1323/128x102/filters:focal(1000x662:1001x663):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25338088/Snapdragon_8s_Gen_3___Key_Visual.jpg"
-  },
-  {
-    id: 5,
-    title: "Lego’s 3,745-piece D&D set comes with its own playable adventure",
-    description: "Lego’s 3,745-piece D&D set comes with its own playable adventure",
-    author: "JESS WEATHERBED",
-    date: "MAR 16",
-    comments: 22,
-    image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:1500x1000/128x102/filters:focal(750x500:751x501):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25344255/dungeons_and_dragons_lego_2.jpg"
-  },
-]
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Entertainment from "./components/pages/Entertainment";
+import Reviews from "./components/pages/Reviews";
+import Science from "./components/pages/Science";
+import Tech from "./components/pages/Tech";
+import Categories from "./components/Categories";
+import Navbar from "./components/Navbar";
+import HeroImage from "./components/pages/HeroImage";
+import BlogPost from "./components/pages/BlogPost";
+import SearchResults from "./components/pages/SearchResults";
+import SignUp from "./components/pages/SignUp";
+import BodyClass from "./components/BodyClass";
+import Login from "./components/pages/Login";
+import "@radix-ui/themes/styles.css";
+import { FiLoader } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import supabase from "./utils";
 
 export default function App() {
+  const [stories, setStories] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isBlogPostPage = location.pathname.includes("/blogpost/");
+  const isSearchResultsPage = location.pathname.includes("/search/");
+  const isSignUpPage = location.pathname.includes("/signup");
+  const isLoginPage = location.pathname.includes("/login");
 
-const location = useLocation();
-const isBlogPostPage = location.pathname.includes('/blogpost/');
-const isSearchResultsPage = location.pathname.includes('/search/');
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) navigate("/login");
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) navigate("/login");
+    });
+    setIsLoading(true);
+    supabase
+      .from("blogs")
+      .select("*")
+      .then(({ data, error }) => {
+        if (data) {
+          setStories(data);
+        }
+        if (error) {
+          console.log(error);
+        }
+      });
+    setIsLoading(false);
+    return () => subscription.unsubscribe();
+  }, []);
+  if (isLoading) {
+    return (
+      <div className="text-green-100 h-screen grid place-content-center text-4xl">
+        <FiLoader className="animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <div className={`bg-[#131313] ${isBlogPostPage ? 'bg-[#ffffff]' : ''} ${isSearchResultsPage ? 'bg-[#5200ff]' : ''}`}>
-      <Navbar />
-      <div className={`flex gap-6 justify-end px-40 items-center ${isBlogPostPage ? 'mt-0 pt-6' : 'mt-10'}`}>
-        <Categories />
+    <>
+      <BodyClass />
+      <div
+        className={`bg-[#131313] ${isBlogPostPage ? "bg-[#ffffff]" : ""} ${
+          isSearchResultsPage ? "bg-[#5200ff]" : ""
+        }`}
+      >
+        <Navbar />
+        <div
+          className={`md:flex gap-6 justify-end hidden md:visible px-10 xl:px-40 items-center ${
+            isBlogPostPage || isSignUpPage || isLoginPage ? "mt-0" : "mt-10"
+          } ${isBlogPostPage ? "pt-6" : "pt-0"}`}
+        >
+          <Categories />
+        </div>
+        <Routes>
+          <Route path="/" element={<HeroImage stories={stories} />} />
+          <Route path="/entertainment" element={<Entertainment />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/science" element={<Science />} />
+          <Route path="/tech" element={<Tech />} />
+          {/* <Route path={`/blogpost`} element={<BlogPost story={'hellow'} />} /> */}
+          <Route
+            path="/blogpost/:id"
+            element={<BlogPost stories={stories} />}
+          />
+          <Route path="/search/" element={<SearchResults blogs={stories} />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path="/" element={<HeroImage />} />
-        <Route path="/entertainment" element={<Entertainment />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/science" element={<Science />} />
-        <Route path="/tech" element={<Tech />} />
-        {/* <Route path={`/blogpost`} element={<BlogPost story={'hellow'} />} /> */}
-        <Route path="/blogpost/:id" element={<BlogPost />} />
-        <Route path="/search/" element={<SearchResults />} />
-      </Routes>
-    </div>
-  )
+    </>
+  );
 }

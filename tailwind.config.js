@@ -16,7 +16,15 @@ export default {
         "franklin": ['Libre Franklin', 'sans-serif'], 
         "gotu": ['Gotu', 'sans-serif'], 
         "poly": ['PolySans', 'sans-serif'], 
-    } 
+    } ,
+    colors : {
+      "main" : "#09090b",
+    },
+
+    backgroundImage : {
+      "auth" : "https://wallpapercave.com/wp/wp6257053.jpg",
+    }
+
     },
   },
   plugins: [],

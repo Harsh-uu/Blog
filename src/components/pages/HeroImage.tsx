@@ -65,8 +65,8 @@ export default function HeroImage({ stories }: HeroImageProps) {
                 )}
 
             </div>
-            <div className="sm:ml-20 xl:max-w-[35%] sm:max-w-[27rem] xl:pl-10 pb-16 xl:pb-0 px-4 w-full">
-                <h1 className="text-[#3cffd0] mt-10 xl:mt-0 text-lg ml-7 sm:ml-0">Top Stories</h1>
+            <div className="sm:ml-20 xl:max-w-[39%] sm:max-w-[27rem] xl:pl-10 pb-16 xl:pb-0 px-4 w-full">
+                <h1 className="text-[#3cffd0] mt-10 text-lg ml-7 sm:ml-0">Top Stories</h1>
                 {stories?.filter(story => story !== currentStory).map((story, index) => (
                     <Link to={`/blogpost/${story.id}`} className={`flex w-[90%] mx-auto sm:mx-0 sm:w-full relative gap-4 pb-5 group ${index < 4 ? "border-b-2 border-[#313131]" : ""}`} key={index} onClick={() => handleClick(index)}>
                         <p className="text-[#3cffd0] mt-[1.125rem] bg-[#2e2e2e] absolute left-1 top-1 sm:-left-12 font-gotu grid text-xs place-content-center h-6 w-6 rounded-full">{1 + index}</p>

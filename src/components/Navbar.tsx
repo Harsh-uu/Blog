@@ -9,6 +9,7 @@ import { User } from "@supabase/supabase-js";
 import { IoIosMenu } from "react-icons/io";
 import supabase, { signOut } from "../utils";
 
+
 export default function Navbar() {
   const navigate = useNavigate();
 
@@ -17,13 +18,6 @@ export default function Navbar() {
   const isSignUpPage = location.pathname.includes("/signup");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<User | null>(null);
-
-  const [isNavVisible, setIsNavVisible] = useState(false);
-
-  const toggleNav = () => {
-    setIsNavVisible(!isNavVisible);
-    document.body.style.overflow = !isNavVisible ? "hidden" : "auto";
-  };
 
   useEffect(() => {
     return () => {
@@ -51,6 +45,12 @@ export default function Navbar() {
     return null;
   }
 
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const toggleNav = () => {
+    setIsNavVisible((prev) => !prev);
+    document.body.style.overflow = isNavVisible ? "auto" : "hidden";
+  };
+
   return (
     <div
       className={`${isSearchResultsPage ? "bg-[#5200ff]" : ""} ${
@@ -74,6 +74,7 @@ export default function Navbar() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleClick();
+                  toggleNav();
                 }}
               >
                 <input
@@ -89,7 +90,10 @@ export default function Navbar() {
                     isSearchResultsPage ? "hover:text-[#a980ff]" : ""
                   }`}
                   size={16}
-                  onClick={handleClick}
+                  onClick={()=>{
+                    handleClick();
+                    toggleNav();
+                  }}
                 />
               </form>
             </div>

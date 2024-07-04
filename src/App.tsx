@@ -59,15 +59,16 @@ export default function App() {
     );
   }
 
+
   return (
-    <>
+    <div className="bg-white">
       <BodyClass />
       <div
         className={`bg-[#131313] ${isBlogPostPage ? "bg-[#ffffff]" : ""} ${
           isSearchResultsPage ? "bg-[#5200ff]" : ""
         }`}
       >
-        <Navbar />
+        <Navbar/>
         <div
           className={`md:flex gap-6 justify-end hidden md:visible px-10 xl:px-40 items-center ${
             isBlogPostPage || isSignUpPage || isLoginPage ? "mt-0" : "mt-10"
@@ -91,6 +92,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }

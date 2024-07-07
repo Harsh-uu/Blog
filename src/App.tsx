@@ -14,8 +14,9 @@ import BodyClass from "./components/BodyClass";
 import Login from "./components/pages/Login";
 import "@radix-ui/themes/styles.css";
 import { FiLoader } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import supabase from "./utils";
+import SideNav from "./components/SideNav";
 
 export default function App() {
   const [stories, setStories] = useState<any[]>([]);
@@ -27,6 +28,7 @@ export default function App() {
   const isSearchResultsPage = location.pathname.includes("/search/");
   const isSignUpPage = location.pathname.includes("/signup");
   const isLoginPage = location.pathname.includes("/login");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -52,6 +54,7 @@ export default function App() {
     setIsLoading(false);
     return () => subscription.unsubscribe();
   }, []);
+
   if (isLoading) {
     return (
       <div className="text-green-100 h-screen grid place-content-center text-4xl">
@@ -60,39 +63,48 @@ export default function App() {
     );
   }
 
+  const handleClick = () => {
+    const searchQuery = searchInputRef.current?.value;
+    if (searchQuery) {
+      navigate(`/search/?q=${searchQuery}`);
+    }
+  };
 
+  const toggleNav = () => {
+    setIsNavVisible(!isNavVisible);
+    document.body.style.overflow = isNavVisible ? "auto" : "hidden";
+  };
 
   return (
-    <div className="">
-      <BodyClass />
-      <div
-        className={`bg-[#131313] ${isBlogPostPage ? "bg-[#ffffff]" : ""} ${
-          isSearchResultsPage ? "bg-[#5200ff]" : ""
-        }`}
-      >
-        <Navbar isNavVisible={isNavVisible} setIsNavVisible={setIsNavVisible}/>
+    <div>
+      <div className={`${isNavVisible ? "" : "hidden"}`}><SideNav toggleNav={toggleNav} handleClick={handleClick} searchInputRef={searchInputRef} isSearchResultsPage={isSearchResultsPage}/></div>
+      <div className={`${isNavVisible ? "opacity-20" : "opacity-100"} z-10`}>
+        <BodyClass />
         <div
-          className={`md:flex gap-6 justify-end hidden md:visible px-10 xl:px-40 items-center ${
-            isBlogPostPage || isSignUpPage || isLoginPage ? "mt-0" : "mt-10"
-          } ${isBlogPostPage ? "pt-6" : "pt-0"}`}
+          className={`bg-[#131313] ${isBlogPostPage ? "bg-[#ffffff]" : ""} ${
+            isSearchResultsPage ? "bg-[#5200ff]" : ""
+          }`}
         >
-          <Categories />
+          <Navbar toggleNav={toggleNav} handleClick={handleClick} searchInputRef={searchInputRef} isSearchResultsPage={isSearchResultsPage}/>
+          <div
+            className={`md:flex gap-6 justify-end hidden md:visible px-10 xl:px-40 items-center ${
+              isBlogPostPage || isSignUpPage || isLoginPage ? "mt-0" : "mt-10"
+            } ${isBlogPostPage ? "pt-6" : "pt-0"}`}
+          >
+            <Categories />
+          </div>
+          <Routes>
+            <Route path="/" element={<HeroImage stories={stories} />} />
+            <Route path="/entertainment" element={<Entertainment />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/science" element={<Science />} />
+            <Route path="/tech" element={<Tech />} />
+            <Route path="/blogpost/:id" element={<BlogPost stories={stories} />} />
+            <Route path="/search/" element={<SearchResults blogs={stories} />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </div>
-        <Routes>
-          <Route path="/" element={<HeroImage stories={stories} />} />
-          <Route path="/entertainment" element={<Entertainment />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/science" element={<Science />} />
-          <Route path="/tech" element={<Tech />} />
-          {/* <Route path={`/blogpost`} element={<BlogPost story={'hellow'} />} /> */}
-          <Route
-            path="/blogpost/:id"
-            element={<BlogPost stories={stories} />}
-          />
-          <Route path="/search/" element={<SearchResults blogs={stories} />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ export default function SearchResults({ blogs }: { blogs: Blog[] }) {
           {searchQuery}
         </div>
       </div>
-      <div className="bg-[#131313] pb-32 min-h-[calc(100vh-350px)] pt-10">
+      <div className="bg-[#131313] pb-32 min-h-[calc(100vh-250px)] pt-10">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => {
             const safeSearchQuery = searchQuery || "";

@@ -9,10 +9,13 @@ import { User } from "@supabase/supabase-js";
 import { IoIosMenu } from "react-icons/io";
 import supabase, { signOut } from "../utils";
 
+interface NavbarProps {
+  isNavVisible: boolean;
+  setIsNavVisible: (value: boolean) => void;
+}
 
-export default function Navbar() {
+export default function Navbar({ isNavVisible, setIsNavVisible }: NavbarProps) {
   const navigate = useNavigate();
-
   const location = useLocation();
   const isSearchResultsPage = location.pathname.includes("/search/");
   const isSignUpPage = location.pathname.includes("/signup");
@@ -31,12 +34,13 @@ export default function Navbar() {
       navigate(`/search/?q=${searchQuery}`);
     }
   };
+
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
-      // console.log(error);
       if (data) setUser(data.user);
     });
   }, []);
+
   if (
     location.pathname.includes("/blogpost/") ||
     location.pathname.includes("/signup") ||
@@ -45,18 +49,13 @@ export default function Navbar() {
     return null;
   }
 
-  const [isNavVisible, setIsNavVisible] = useState(false);
   const toggleNav = () => {
-    setIsNavVisible((prev) => !prev);
+    setIsNavVisible(!isNavVisible);
     document.body.style.overflow = isNavVisible ? "auto" : "hidden";
   };
 
   return (
-    <div
-      className={`${isSearchResultsPage ? "bg-[#5200ff]" : ""} ${
-        isSignUpPage ? "bg-[#09090b]" : ""
-      }`}
-    >
+    <div className={`${isSearchResultsPage ? "bg-[#5200ff]" : ""} ${isSignUpPage ? "bg-[#09090b]" : ""}`}>
       <nav className="flex pt-6 justify-between px-6 sm:px-10 lg:px-20 py-2">
         <button onClick={toggleNav} className="md:hidden">
           <IoIosMenu className="text-white" size={30} />
@@ -68,9 +67,7 @@ export default function Navbar() {
                 <FaWindowClose size={40} className="text-[#3cffd0] p-1" />
               </button>
               <form
-                className={`bg-[#4200cc] rounded-sm px-4 flex h-8 items-center group ${
-                  isSearchResultsPage ? "bg-[#4200cc]" : ""
-                }`}
+                className={`bg-[#4200cc] rounded-sm px-4 flex h-8 items-center group ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleClick();
@@ -80,17 +77,13 @@ export default function Navbar() {
                 <input
                   ref={searchInputRef}
                   type="text"
-                  className={`h-7 w-[86%] lg:w-96 placeholder:text-sm font-franklin placeholder:font-poly tracking-widest bg-[#4200cc] text-white outline-none text-sm ${
-                    isSearchResultsPage ? "bg-[#4200cc]" : ""
-                  }`}
+                  className={`h-7 w-[86%] lg:w-96 placeholder:text-sm font-franklin placeholder:font-poly tracking-widest bg-[#4200cc] text-white outline-none text-sm ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
                   placeholder="SEARCH..."
                 />
                 <Search
-                  className={`hover:text-[#3cffd0] text-[#3cffd0] cursor-pointer ${
-                    isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-                  }`}
+                  className={`hover:text-[#3cffd0] text-[#3cffd0] cursor-pointer ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}
                   size={16}
-                  onClick={()=>{
+                  onClick={() => {
                     handleClick();
                     toggleNav();
                   }}
@@ -98,50 +91,26 @@ export default function Navbar() {
               </form>
             </div>
             <ul>
-              {[
-                "Home",
-                "Entertainment",
-                "Reviews",
-                "Science",
-                "Tech",
-                "Videos",
-              ].map((item, index) => (
+              {["Home", "Entertainment", "Reviews", "Science", "Tech", "Videos"].map((item, index) => (
                 <li
                   key={index}
-                  className={` text-3xl font-poly py-5 border-b border-[#4200cc] ${
-                    index === 5 ? "last:border-b-0" : ""
-                  }`}
+                  className={` text-3xl font-poly py-5 border-b border-[#4200cc] ${index === 5 ? "last:border-b-0" : ""}`}
                 >
-             
                   <Link to={item === "Home" ? "/" : `/${item.toLowerCase()}`} onClick={toggleNav}>
                     {item}
                   </Link>
                 </li>
               ))}
             </ul>
-            <p className="text-[0.8rem] text-[#3cffd0] mt-4 font-medium font-franklin">
-              FOLLOW US
-            </p>
+            <p className="text-[0.8rem] text-[#3cffd0] mt-4 font-medium font-franklin">FOLLOW US</p>
             <ul className="flex gap-8 text-[#3cffd0] mt-4 ml-2">
-              <button
-                className={`hover:text-white ${
-                  isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-                }`}
-              >
+              <button className={`hover:text-white ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
                 <Linkedin />
               </button>
-              <button
-                className={`hover:text-[#3cffd0] ${
-                  isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-                }`}
-              >
+              <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
                 <Instagram />
               </button>
-              <button
-                className={`hover:text-[#3cffd0] ${
-                  isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-                }`}
-              >
+              <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
                 <Twitter />
               </button>
             </ul>
@@ -149,57 +118,38 @@ export default function Navbar() {
         )}
 
         <ul className="md:flex gap-10 hidden md:visible text-white">
-          <button
-            className={`hover:text-[#3cffd0] ${
-              isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-            }`}
-          >
+          <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
             <Linkedin />
           </button>
-          <button
-            className={`hover:text-[#3cffd0] ${
-              isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-            }`}
-          >
+          <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
             <Instagram />
           </button>
-          <button
-            className={`hover:text-[#3cffd0] ${
-              isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-            }`}
-          >
+          <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
             <Twitter />
           </button>
         </ul>
         <form
-          className={`md:flex bg-[#292929] rounded-lg hidden md:visible px-2 items-center group ${
-            isSearchResultsPage ? "bg-[#4200cc]" : ""
-          }`}
+          className={`md:flex bg-[#292929] rounded-lg hidden md:visible px-2 items-center group ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
           onSubmit={(e) => {
             e.preventDefault();
             handleClick();
           }}
         >
           <Search
-            className={`hover:text-[#3cffd0] text-white cursor-pointer ${
-              isSearchResultsPage ? "hover:text-[#a980ff]" : ""
-            }`}
+            className={`hover:text-[#3cffd0] text-white cursor-pointer ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}
             size={16}
             onClick={handleClick}
           />
           <input
             ref={searchInputRef}
             type="text"
-            className={` h-7 w-60 lg:w-96 placeholder:text-sm font-franklin placeholder:font-franklin placeholder:text-center bg-[#292929] text-white outline-none px-4 text-sm ${
-              isSearchResultsPage ? "bg-[#4200cc]" : ""
-            }`}
+            className={` h-7 w-60 lg:w-96 placeholder:text-sm font-franklin placeholder:font-franklin placeholder:text-center bg-[#292929] text-white outline-none px-4 text-sm ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
             placeholder="Search"
           />
         </form>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger className="focus:outline-none">
-            {/* <Button> */}
             {user?.user_metadata.avatar_url ? (
               <img
                 src={user?.user_metadata.avatar_url}
@@ -211,7 +161,6 @@ export default function Navbar() {
                 className="text-white outline-none hover:text-[#3cffd0] focus:text-[#3cffd0]"
               />
             )}
-            {/* </Button> */}
           </DropdownMenu.Trigger>
           <DropdownMenu.Content className="bg-[#292929] text-white mt-1 font-franklin rounded-md animate-">
             <DropdownMenu.Item className="py-2 px-4 text-[0.8rem] font-normal rounded-md focus:outline-none focus:text-[#3cffd0] hover:text-[#3cffd0] hover:bg-[#3b4046] hover:animate-pulse flex items-center gap-2 cursor-pointer">
@@ -227,10 +176,8 @@ export default function Navbar() {
               </DropdownMenu.Item>
             ) : (
               <DropdownMenu.Item className="py-2 px-4 text-[0.8rem] font-normal rounded-md focus:outline-none focus:text-[#3cffd0] hover:text-[#3cffd0] hover:bg-[#3b4046] hover:animate-pulse flex items-center gap-2 cursor-pointer">
-                <Link to="/login">
-                  <TbLogin2 size={16} />
-                  LOGIN
-                </Link>
+                <TbLogin2 size={16} />
+                <Link to="/login">Login</Link>
               </DropdownMenu.Item>
             )}
           </DropdownMenu.Content>

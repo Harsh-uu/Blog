@@ -39,3 +39,12 @@ body.blogpost {
   text-underline-offset: 6px;
   text-decoration-color: #3cffd0;
 }
+
+.scrollable-x::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-x {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

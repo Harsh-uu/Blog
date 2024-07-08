@@ -47,7 +47,7 @@ export default function Navbar({ toggleNav, handleClick, searchInputRef, isSearc
           <IoIosMenu className="text-white" size={30} />
         </button>
 
-        <ul className="md:flex gap-10 hidden md:visible text-white">
+        <ul className="md:flex lg:gap-10 gap-6 hidden md:visible text-white">
           <button className={`hover:text-[#3cffd0] ${isSearchResultsPage ? "hover:text-[#a980ff]" : ""}`}>
             <Linkedin />
           </button>
@@ -59,7 +59,7 @@ export default function Navbar({ toggleNav, handleClick, searchInputRef, isSearc
           </button>
         </ul>
         <form
-          className={`md:flex bg-[#292929] rounded-lg hidden md:visible px-2 items-center group ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
+          className={`md:flex bg-[#292929] rounded-lg hidden px-2 items-center group ${isSearchResultsPage ? "bg-[#4200cc]" : ""}`}
           onSubmit={(e) => {
             e.preventDefault();
             handleClick();
@@ -77,7 +77,7 @@ export default function Navbar({ toggleNav, handleClick, searchInputRef, isSearc
             placeholder="Search"
           />
         </form>
-
+  
         <DropdownMenu.Root>
           <DropdownMenu.Trigger className="focus:outline-none">
             {user?.user_metadata.avatar_url ? (

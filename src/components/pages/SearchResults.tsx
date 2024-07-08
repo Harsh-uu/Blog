@@ -30,7 +30,7 @@ export default function SearchResults({ blogs }: { blogs: Blog[] }) {
         <h1 className="font-franklin font-semibold text-[0.8rem] tracking-widest text-[#3cffd0]">
           SEARCH RESULTS FOR :
         </h1>
-        <div className="font-bold text-7xl font-volt tracking-tight mt-4 border-b-2">
+        <div className="font-bold text-7xl font-volt tracking-tight mt-4 border-b-2 w-full overflow-x-scroll scrollable-x">
           {searchQuery}
         </div>
       </div>

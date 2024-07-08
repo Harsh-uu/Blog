@@ -88,7 +88,7 @@ export default function App() {
         >
           <Navbar toggleNav={toggleNav} handleClick={handleClick} searchInputRef={searchInputRef} isSearchResultsPage={isSearchResultsPage}/>
           <div
-            className={`md:flex gap-6 justify-end hidden md:visible px-10 xl:px-40 items-center ${
+            className={`md:flex gap-6 justify-center lg:justify-end hidden lg:pr-20 xl:pr-40 items-center ${
               isBlogPostPage || isSignUpPage || isLoginPage ? "mt-0" : "mt-10"
             } ${isBlogPostPage ? "pt-6" : "pt-0"}`}
           >

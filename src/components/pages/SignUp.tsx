@@ -60,8 +60,8 @@ export default function SignUp() {
   }, []);
   return (
     <div className="bg-[#09090b] h-screen flex text-white justify-evenly">
-      <div className=" bg-[#18181b] w-full border-r-2 max-w-90 border-[#27272a] overflow-hidden h-full p-10 flex flex-col justify-between">
-        <Link
+      <div className=" bg-[#18181b] w-full hidden lg:visible border-r-2 border-[#27272a] overflow-hidden h-full p-10 lg:flex lg:flex-col justify-between">
+      <Link
           className="font-bold text-3xl font-lakki w-fit hover:animate-pulse"
           to="/"
         >
@@ -82,17 +82,17 @@ export default function SignUp() {
       </div>
       <Link
         to="/login"
-        className="absolute top-10 right-20 hover:bg-[#27272a] px-3 py-1 rounded-md font-semibold"
+        className="absolute top-10 sm:right-10 right-4 hover:bg-[#27272a] bg-[#27272a] sm:bg-[#09090b] border sm:border-none px-3 py-1 rounded-md font-semibold text-xs sm:text-base"
       >
         Login
       </Link>
       <div className="w-full grid items-center place-content-center">
         <div className="text-white bg-[#09090b] min-w-[19rem] text-center">
-          <h1 className="text-3xl font-semibold pb-3 ">Create an account</h1>
-          <p className="text-[#a1a1aa] text-sm">
+          <h1 className="sm:text-3xl text-2xl font-semibold pb-3 ">Create an account</h1>
+          <p className="text-[#a1a1aa] sm:text-sm text-xs">
             Enter the details below to create your account
           </p>
-          <div className="flex flex-col gap-3 pt-6 pb-4">
+          <div className="flex flex-col gap-3 pt-6 pb-4 w-[90%] mx-auto sm:w-full">
             <input
               type="text"
               placeholder="Email"
@@ -155,7 +155,7 @@ export default function SignUp() {
                       )} */}
           </div>
 
-          <div className=" relative my-6 border-b border-white  flex flex-row justify-between">
+          <div className=" relative my-6 border-b border-white w-[90%] sm:w-full mx-auto flex flex-row justify-between">
             <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 py-1 bg-main pb-1.5  text-[#a1a1aa] text-xs">
               OR CONTINUE WITH
             </p>
@@ -164,7 +164,7 @@ export default function SignUp() {
           <button
             disabled={isLoading}
             onClick={googleLogin}
-            className="bg-main disabled:bg-black/35 hover:bg-[#27272a] w-full py-2 text-white font-semibold border-2 border-[#27272a] rounded-md flex justify-center items-center"
+            className="bg-main w-[90%] mx-auto hover:bg-[#27272a] sm:w-full py-2 text-white font-semibold border-2 border-[#27272a] rounded-md flex justify-center items-center"
           >
             <FaGoogle />
           </button>

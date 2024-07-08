@@ -28,7 +28,7 @@ export default function App() {
   const isSearchResultsPage = location.pathname.includes("/search/");
   const isSignUpPage = location.pathname.includes("/signup");
   const isLoginPage = location.pathname.includes("/login");
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -68,6 +68,7 @@ export default function App() {
     if (searchQuery) {
       navigate(`/search/?q=${searchQuery}`);
     }
+    console.log(searchInputRef.current?.value);
   };
 
   const toggleNav = () => {
@@ -77,7 +78,7 @@ export default function App() {
 
   return (
     <div>
-      <div className={`${isNavVisible ? "" : "hidden"}`}><SideNav toggleNav={toggleNav} handleClick={handleClick} searchInputRef={searchInputRef} isSearchResultsPage={isSearchResultsPage}/></div>
+      <div className={`${isNavVisible ? "" : "hidden"}`}><SideNav toggleNav={toggleNav}/></div>
       <div className={`${isNavVisible ? "opacity-20" : "opacity-100"} z-10`}>
         <BodyClass />
         <div

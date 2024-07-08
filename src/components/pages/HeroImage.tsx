@@ -46,7 +46,7 @@ export default function HeroImage({ stories }: HeroImageProps) {
     return (
         <div className="xl:w-[72rem] w-fit mx-auto flex flex-col xl:flex-row place-items-center">
             <div className="md:mt-24 mt-16 xl:pb-20 w-[90%] sm:w-[35rem] lg:w-[40rem] group cursor-pointer relative border-b-2 xl:border-none border-[#313131] pb-10">
-                <h1 className="text-white/40 text-[4.35rem] md:text-9xl font-lakki h-fit absolute -top-5 md:-left-72 md:top-40 md:-rotate-90">Blogology.</h1>
+                <h1 className="text-white/40 text-7xl md:text-9xl font-lakki h-fit absolute -top-5 md:-left-72 md:top-40 md:-rotate-90">Blogology.</h1>
                 {currentStory && (
                 <Link to={`blogpost/${currentStory.id}`}> 
                 <img width={600} height={600} onClick={() => handleClick(currentStory.id)} className="rounded-md mx-auto" src={currentStory.image} alt="Tiktok" /> 

@@ -67,8 +67,20 @@ export default function Login() {
         </div>
       </div>
       <Link
+          className="font-bold text-3xl lg:hidden hidden sm:block absolute top-12 left-10 opacity-100 font-lakki w-fit hover:animate-pulse"
+          to="/"
+        >
+          Blogology.
+        </Link>
+      <Link
+          className="font-bold text-5xl sm:hidden absolute top-8 left-10 opacity-20 -rotate-45 font-lakki w-fit hover:animate-pulse"
+          to="/"
+        >
+          B.
+        </Link>
+      <Link
         to="/signup"
-        className="absolute top-10 sm:right-10 right-4 hover:bg-[#27272a] bg-[#27272a] sm:bg-[#09090b] border sm:border-none px-3 py-1 rounded-md font-semibold text-xs sm:text-base"
+        className="absolute top-10 sm:right-10 right-6 hover:bg-[#27272a] bg-[#27272a] sm:bg-[#09090b] px-3 py-1 rounded-md font-semibold text-xs sm:text-base"
       >
         Sign Up
       </Link>
@@ -77,8 +89,8 @@ export default function Login() {
           <div className="mb-5 text-[#a1a1aa] text-[1rem]">{errorMessage}</div>
         )}
         <div className="text-white bg-[#09090b] min-w-[19rem] text-center">
-          <h1 className="sm:text-3xl text-2xl font-semibold pb-3 ">Welcome Back!</h1>
-          <p className="text-[#a1a1aa] sm:text-sm text-xs">
+          <h1 className="sm:text-3xl text-3xl font-semibold pb-3 ">Welcome Back!</h1>
+          <p className="text-[#a1a1aa] sm:text-sm text-[0.8rem]">
             Enter the details below to login to your account
           </p>
           <form className="flex flex-col gap-3 pt-6 pb-4 w-[90%] mx-auto sm:w-full">

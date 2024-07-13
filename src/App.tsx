@@ -79,7 +79,7 @@ export default function App() {
   return (
     <div>
       <div className={`${isNavVisible ? "" : "hidden"}`}><SideNav toggleNav={toggleNav}/></div>
-      <div className={`${isNavVisible ? "opacity-20" : "opacity-100"} z-10`}>
+      <div onClick={()=>{isNavVisible ? setIsNavVisible(!isNavVisible) : ""}} className={`${isNavVisible ? "opacity-20" : "opacity-100"} z-10`}>
         <BodyClass />
         <div
           className={`bg-[#131313] ${isBlogPostPage ? "bg-[#ffffff]" : ""} ${

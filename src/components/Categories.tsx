@@ -15,7 +15,7 @@ export default function Categories() {
     }
 
     return (
-        <div className={`${isSearchResultsPage ? "bg-[#5200ff]" : ""}`}>
+        <div className={`${isSearchResultsPage ? "bg-[#5200ff]" : ""} z-10`}>
             <nav className={`border-b-[1px] ${isBlogPostPage ? "border-black" : ""}`}>
                 <ul className={`flex gap-6 text font-franklin mt-4
                  ${isBlogPostPage ? "text-black" : "text-white"}`}>

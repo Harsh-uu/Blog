@@ -16,6 +16,7 @@ export default {
         "franklin": ['Libre Franklin', 'sans-serif'], 
         "gotu": ['Gotu', 'sans-serif'], 
         "poly": ['PolySans', 'sans-serif'], 
+        "roman": ['FKRoman', 'sans-serif']
     } ,
     colors : {
       "main" : "#09090b",

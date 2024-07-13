@@ -37,7 +37,6 @@ const BlogPost = ({stories}:BlogPostProps) => {
         >
           B.
         </Link>
-        {/* <SideNav/> */}
         <div className="flex text-[#5200ff] font-black gap-3 text-[0.8rem] mt-2 sm:tracking-widest font-mono">
           <p>ARTIFICIAL TECHNOLOGY</p>
           <p>/</p>

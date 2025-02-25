@@ -52,7 +52,7 @@ export default function HeroImage({ stories }: HeroImageProps) {
                 <img width={600} height={600} onClick={() => handleClick(currentStory.id)} className="rounded-md mx-auto" src={currentStory.image} alt="Tiktok" /> 
                 <div className="text-white sm:ml-28 ">
                     <p className="font-bold text-[3rem] leading-[3rem] sm:text-[4rem] pt-2 sm:leading-[4rem] font-volt tracking-tighter ">{currentStory.title}</p>
-                    <p className="font-ledger text-xl sm:text-2xl max-w-[95%] mt-4">{currentStory.description}</p>
+                    <p className="font-ledger text-5xl sm:text-2xl max-w-[95%] mt-4">{currentStory.description}</p>
                     <div className="flex gap-3 text-[0.7rem] mt-2 tracking-widest">
                         <p className="text-[#3cffd0] uppercase">{currentStory.author}</p>
                         <p className="text-[#949494]">{data.toLocaleString('en-US', { month: 'short', day: 'numeric' }).toUpperCase()}</p>
@@ -80,7 +80,7 @@ export default function HeroImage({ stories }: HeroImageProps) {
                                 <p className="text-[#949494] hidden sm:visible sm:flex gap-1 place-items-center"><MessageSquare size={14}/>{story.comment_count}</p>
                             </div>
                         </div>
-                        <img src={story.image} className="mt-4 border-[1px] rounded-sm hidden sm:block border-[#313131] max-h-20 min-h-20 object-cover" alt="" />
+                        <img src={story.image} className="mt-4 border-[1px] rounded-sm hidden sm:block border-[#313131] max-h-20 min-h-20 object-cover min-w-[7.2rem]" alt="" />
                     </Link>
                 ))}
             </div>

@@ -86,7 +86,7 @@ const BlogPost = ({stories}:BlogPostProps) => {
         <div className="mt-10 flex flex-col gap-4">
           {stories.filter(story => story.id !== Number(title.id)).slice(0, 4).map((story, index) => (
             <div key={index} className={`flex pb-4 flex-row gap-10 ${index < 3 ? "border-b-[1px] border-[#313131]" : ""}`}>
-              <img src={story.image} className="max-h-16 min-h-16 my-auto" alt={story.title} />
+              <img src={story.image} className="max-h-16 min-h-16 min-w-24 my-auto" alt={story.title} />
               <Link to ={`/blogpost/${story.id}`} >
               <h1 className="my-auto hover-underline xl:leading-10 sm:leading-7 leading-5 font-poly font-black text-xl sm:text-2xl xl:text-4xl">{story.title}</h1>
               </Link>

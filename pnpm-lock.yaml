@@ -18,7 +18,7 @@ dependencies:
     specifier: ^0.1.8
     version: 0.1.8(@supabase/supabase-js@2.44.2)
   '@supabase/supabase-js':
-    specifier: ^2.43.4
+    specifier: ^2.44.2
     version: 2.44.2
   '@types/firebase':
     specifier: ^3.2.1
@@ -41,16 +41,16 @@ dependencies:
 
 devDependencies:
   '@types/react':
-    specifier: ^18.2.56
+    specifier: ^18.2.64
     version: 18.2.64
   '@types/react-dom':
-    specifier: ^18.2.19
+    specifier: ^18.2.21
     version: 18.2.21
   '@typescript-eslint/eslint-plugin':
-    specifier: ^7.0.2
+    specifier: ^7.1.1
     version: 7.1.1(@typescript-eslint/parser@7.1.1)(eslint@8.57.0)(typescript@5.4.2)
   '@typescript-eslint/parser':
-    specifier: ^7.0.2
+    specifier: ^7.1.1
     version: 7.1.1(eslint@8.57.0)(typescript@5.4.2)
   '@vitejs/plugin-react':
     specifier: ^4.2.1
@@ -59,7 +59,7 @@ devDependencies:
     specifier: ^10.4.18
     version: 10.4.18(postcss@8.4.35)
   eslint:
-    specifier: ^8.56.0
+    specifier: ^8.57.0
     version: 8.57.0
   eslint-plugin-react-hooks:
     specifier: ^4.6.0
@@ -74,10 +74,10 @@ devDependencies:
     specifier: ^3.4.1
     version: 3.4.1
   typescript:
-    specifier: ^5.2.2
+    specifier: ^5.4.2
     version: 5.4.2
   vite:
-    specifier: ^5.1.4
+    specifier: ^5.1.5
     version: 5.1.5
 
 packages:
@@ -2893,7 +2893,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.23.0
-      caniuse-lite: 1.0.30001596
+      caniuse-lite: 1.0.30001700
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2935,7 +2935,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001596
+      caniuse-lite: 1.0.30001700
       electron-to-chromium: 1.4.699
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
@@ -2951,8 +2951,8 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /caniuse-lite@1.0.30001596:
-    resolution: {integrity: sha512-zpkZ+kEr6We7w63ORkoJ2pOfBwBkY/bJrG/UZ90qNb45Isblu8wzDgevEOrRL1r9dWayHjYiiyCMEXPn4DweGQ==}
+  /caniuse-lite@1.0.30001700:
+    resolution: {integrity: sha512-2S6XIXwaE7K7erT8dY+kLQcpa5ms63XlRkMkReXjle+kf6c5g38vyMl+Z5y8dSxOFDhcFe+nxnn261PLxBSQsQ==}
     dev: true
 
   /chalk@2.4.2:

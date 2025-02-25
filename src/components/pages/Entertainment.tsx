@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   MessageSquare, Film, Tv, Music, Gamepad2, 
-  TrendingUp, Star, Calendar, Share2, Bookmark, Play 
+  TrendingUp, Star, Calendar, Share2, Play 
 } from "lucide-react";
 
 interface EntertainmentContent {
@@ -129,7 +129,7 @@ export default function Entertainment() {
   ];
 
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [hoveredArticle, setHoveredArticle] = useState<number | null>(null);
+  const [_, setHoveredArticle] = useState<number | null>(null);
   const [heroIndex, setHeroIndex] = useState(0);
 
   const handleCategoryChange = (category: string) => {
